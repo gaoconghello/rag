@@ -47,9 +47,10 @@ class Settings(BaseSettings):
     MINIO_BUCKET_NAME: str = os.getenv("MINIO_BUCKET_NAME", "documents")
 
     # OpenAI settings
-    OPENAI_API_BASE: str = "https://api.openai.com/v1"
+    OPENAI_API_BASE: str = os.getenv("OPENAI_API_BASE", "https://api.openai.com/v1")
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
-    OPENAI_MODEL: str = "gpt-4"
+    OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-4")
+    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "BAAI/bge-large-en-v1.5")
     
     # Vector Store Settings
     VECTOR_STORE_TYPE: str = "chroma"

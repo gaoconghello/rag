@@ -9,6 +9,7 @@ from app import models
 from app.db.session import get_db
 from app.core.security import get_api_key_user
 from app.core.config import settings
+from app.services.embeddings.custom_embeddings import CustomEmbeddings
 
 router = APIRouter()
 
@@ -36,9 +37,11 @@ def query_knowledge_base(
                 detail=f"Knowledge base {knowledge_base_id} not found",
             )
         
-        embeddings = OpenAIEmbeddings(
+        # Initialize embeddings
+        embeddings = CustomEmbeddings(
             openai_api_key=settings.OPENAI_API_KEY,
-            openai_api_base=settings.OPENAI_API_BASE
+            openai_api_base=settings.OPENAI_API_BASE,
+            model=settings.EMBEDDING_MODEL
         )
         
         vector_store = VectorStoreFactory.create(

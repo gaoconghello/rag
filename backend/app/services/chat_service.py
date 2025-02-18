@@ -14,6 +14,7 @@ from app.models.chat import Message
 from app.models.knowledge import KnowledgeBase, Document
 from langchain.globals import set_verbose, set_debug
 from app.services.vector_store import VectorStoreFactory
+from app.services.embeddings.custom_embeddings import CustomEmbeddings
 
 set_verbose(True)
 set_debug(True)
@@ -52,9 +53,10 @@ async def generate_response(
         )
         
         # Initialize embeddings
-        embeddings = OpenAIEmbeddings(
+        embeddings = CustomEmbeddings(
             openai_api_key=settings.OPENAI_API_KEY,
-            openai_api_base=settings.OPENAI_API_BASE
+            openai_api_base=settings.OPENAI_API_BASE,
+            model=settings.EMBEDDING_MODEL
         )
         
         # Create a vector store for each knowledge base
@@ -84,12 +86,13 @@ async def generate_response(
         
         # Initialize the language model
         llm = ChatOpenAI(
-            temperature=0,
+            temperature=0.1,
             streaming=True,
             model=settings.OPENAI_MODEL,
-            openai_api_key=settings.OPENAI_API_KEY,
-            openai_api_base=settings.OPENAI_API_BASE
+            api_key=settings.OPENAI_API_KEY,
+            base_url=settings.OPENAI_API_BASE
         )
+
 
         # Create contextualize question prompt
         contextualize_q_system_prompt = (

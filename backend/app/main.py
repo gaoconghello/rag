@@ -28,6 +28,13 @@ app.include_router(openapi_router, prefix="/openapi")
 
 @app.on_event("startup")
 async def startup_event():
+    # Print configuration settings
+    print("\n=== Configuration Settings ===")
+    for field, value in settings.__dict__.items():
+        if not field.startswith('_'):  # Skip internal attributes
+            print(f"{field}: {value}")
+    print("===========================\n")
+    
     # Initialize MinIO
     init_minio()
 

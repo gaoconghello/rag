@@ -25,6 +25,7 @@ from app.core.config import settings
 from app.core.minio import get_minio_client
 from minio.error import MinioException
 from app.services.vector_store import VectorStoreFactory
+from app.services.embeddings.custom_embeddings import CustomEmbeddings
 
 router = APIRouter()
 
@@ -511,9 +512,11 @@ async def test_retrieval(
                 detail=f"Knowledge base {request.kb_id} not found",
             )
         
-        embeddings = OpenAIEmbeddings(
+        # Initialize embeddings
+        embeddings = CustomEmbeddings(
             openai_api_key=settings.OPENAI_API_KEY,
-            openai_api_base=settings.OPENAI_API_BASE
+            openai_api_base=settings.OPENAI_API_BASE,
+            model=settings.EMBEDDING_MODEL
         )
         
         vector_store = VectorStoreFactory.create(

@@ -31,6 +31,7 @@ from minio.error import MinioException
 from minio import Minio
 from minio.commonconfig import CopySource
 from app.services.vector_store import VectorStoreFactory
+from app.services.embeddings.custom_embeddings import CustomEmbeddings
 
 class UploadResult(BaseModel):
     file_path: str
@@ -55,10 +56,11 @@ async def process_document(file_path: str, file_name: str, kb_id: int, document_
         preview_result = await preview_document(file_path, chunk_size, chunk_overlap)
         
         # Initialize embeddings
-        logger.info("Initializing OpenAI embeddings...")
-        embeddings = OpenAIEmbeddings(
+        logger.info("Initializing custom embeddings...")
+        embeddings = CustomEmbeddings(
             openai_api_key=settings.OPENAI_API_KEY,
-            openai_api_base=settings.OPENAI_API_BASE
+            openai_api_base=settings.OPENAI_API_BASE,
+            model=settings.EMBEDDING_MODEL
         )
         
         logger.info(f"Initializing vector store with collection: kb_{kb_id}")
@@ -190,25 +192,28 @@ async def preview_document(file_path: str, chunk_size: int = 1000, chunk_overlap
     _, ext = os.path.splitext(file_path)
     ext = ext.lower()
     
-    # Download to temp file
-    with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as temp_file:
+    temp_file_path = None
+    try:
+        # 创建临时文件
+        with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as temp_file:
+            temp_file_path = temp_file.name
+            
+        # 从 MinIO 下载文件
         minio_client.fget_object(
             bucket_name=settings.MINIO_BUCKET_NAME,
             object_name=file_path,
-            file_path=temp_file.name
+            file_path=temp_file_path
         )
-        temp_path = temp_file.name
-    
-    try:
+        
         # Select appropriate loader
         if ext == ".pdf":
-            loader = PyPDFLoader(temp_path)
+            loader = PyPDFLoader(temp_file_path)
         elif ext == ".docx":
-            loader = Docx2txtLoader(temp_path)
+            loader = Docx2txtLoader(temp_file_path)
         elif ext == ".md":
-            loader = UnstructuredMarkdownLoader(temp_path)
+            loader = UnstructuredMarkdownLoader(temp_file_path)
         else:  # Default to text loader
-            loader = TextLoader(temp_path)
+            loader = TextLoader(temp_file_path)
         
         # Load and split the document
         documents = loader.load()
@@ -232,7 +237,13 @@ async def preview_document(file_path: str, chunk_size: int = 1000, chunk_overlap
             total_chunks=len(chunks)
         )
     finally:
-        os.unlink(temp_path)
+        # 确保在函数结束时清理临时文件
+        if temp_file_path and os.path.exists(temp_file_path):
+            try:
+                os.close(os.open(temp_file_path, os.O_RDONLY))  # 确保文件已关闭
+                os.remove(temp_file_path)
+            except Exception as e:
+                print(f"Error cleaning up temporary file: {e}")
 
 async def process_document_background(
     temp_path: str,
@@ -303,9 +314,10 @@ async def process_document_background(
             
             # 3. 创建向量存储
             logger.info(f"Task {task_id}: Initializing vector store")
-            embeddings = OpenAIEmbeddings(
+            embeddings = CustomEmbeddings(
                 openai_api_key=settings.OPENAI_API_KEY,
-                openai_api_base=settings.OPENAI_API_BASE
+                openai_api_base=settings.OPENAI_API_BASE,
+                model=settings.EMBEDDING_MODEL
             )
             
             vector_store = VectorStoreFactory.create(
