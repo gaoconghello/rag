@@ -28,10 +28,11 @@ export default function DashboardLayout({
   };
 
   const navigation = [
-    { name: "Knowledge Base", href: "/dashboard/knowledge", icon: Book },
-    { name: "Chat", href: "/dashboard/chat", icon: MessageSquare },
+    { name: "知识库", href: "/dashboard/knowledge", icon: Book },
+    { name: "聊天", href: "/dashboard/chat", icon: MessageSquare },
     { name: "API Keys", href: "/dashboard/api-keys", icon: User },
   ];
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -63,7 +64,7 @@ export default function DashboardLayout({
                 alt="Logo"
                 className="w-16 h-16 rounded-lg"
               />
-              RAG Web UI
+              RAG 演示
             </Link>
           </div>
 
@@ -103,10 +104,11 @@ export default function DashboardLayout({
               className="flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors duration-200"
             >
               <LogOut className="mr-3 h-4 w-4" />
-              Sign out
+              退出
             </button>
           </div>
         </div>
+
       </div>
 
       {/* Main content */}

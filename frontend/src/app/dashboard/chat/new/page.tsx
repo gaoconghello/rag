@@ -88,20 +88,22 @@ export default function NewChatPage() {
       <DashboardLayout>
         <div className="max-w-2xl mx-auto text-center py-16">
           <h2 className="text-3xl font-bold tracking-tight mb-4">
-            No Knowledge Bases Found
+            没有知识库
           </h2>
           <p className="text-muted-foreground mb-8">
-            You need to create at least one knowledge base before starting a
-            chat.
+            你需要至少一个知识库才能开始对话
+
           </p>
           <Link
+
             href="/dashboard/knowledge"
             className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
           >
             <Plus className="mr-2 h-4 w-4" />
-            Create Knowledge Base
+            创建知识库
           </Link>
         </div>
+
       </DashboardLayout>
     );
   }
@@ -110,9 +112,10 @@ export default function NewChatPage() {
     <DashboardLayout>
       <div className="max-w-2xl mx-auto space-y-8">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Start New Chat</h2>
+          <h2 className="text-3xl font-bold tracking-tight">开始新对话</h2>
           <p className="text-muted-foreground">
-            Select a knowledge base to chat with
+            选择一个知识库来对话
+
           </p>
         </div>
 
@@ -122,27 +125,27 @@ export default function NewChatPage() {
               htmlFor="title"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              Chat Title
+              对话标题
             </label>
             <input
+
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               type="text"
               required
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              placeholder="Enter chat title"
+              placeholder="输入对话标题"
             />
+
           </div>
 
           <div className="space-y-2">
             <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Knowledge Base
+              知识库
             </label>
-            <div className="text-xs text-muted-foreground">
-              Multiple selection coming soon...
-            </div>
             <div className="grid gap-4 md:grid-cols-2">
+
               {isLoading ? (
                 <div className="col-span-2 flex justify-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -188,17 +191,19 @@ export default function NewChatPage() {
               onClick={() => router.back()}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
             >
-              Cancel
+              取消
             </button>
             <button
               type="submit"
+
               disabled={isSubmitting || !selectedKB}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
             >
-              {isSubmitting ? "Creating..." : "Start Chat"}
+              {isSubmitting ? "创建中..." : "开始对话"}
             </button>
           </div>
         </form>
+
       </div>
     </DashboardLayout>
   );

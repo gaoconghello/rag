@@ -79,29 +79,32 @@ export default function ChatPage() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                Your Conversations
+                你的对话
               </h2>
               <p className="text-muted-foreground mt-1">
-                Explore and manage your chat history
+                管理对话历史
               </p>
             </div>
             <Link
+
               href="/dashboard/chat/new"
               className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors duration-200 shadow-sm hover:shadow-md"
             >
               <Plus className="mr-2 h-4 w-4" />
-              Start New Chat
+              开始新对话
             </Link>
           </div>
+
 
           <div className="mt-6 relative">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Search conversations..."
+                placeholder="搜索对话..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+
                 className="w-full pl-10 pr-4 py-2 rounded-full border bg-background/50 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
               />
             </div>
@@ -160,19 +163,22 @@ export default function ChatPage() {
           <div className="text-center py-16 bg-card rounded-lg border">
             <MessageSquare className="mx-auto h-12 w-12 text-muted-foreground/50" />
             <h3 className="mt-4 text-lg font-medium text-foreground">
-              No conversations yet
+              没有对话
             </h3>
             <p className="mt-2 text-muted-foreground">
-              Start a new chat to begin exploring your knowledge base
+              开始新对话以开始探索你的知识库
+
             </p>
             <Link
               href="/dashboard/chat/new"
+
               className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors duration-200"
             >
               <Plus className="mr-2 h-4 w-4" />
-              Start Your First Chat
+              开始你的第一个对话
             </Link>
           </div>
+
         )}
       </div>
     </DashboardLayout>

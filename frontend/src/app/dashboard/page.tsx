@@ -55,22 +55,24 @@ export default function DashboardPage() {
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-              Welcome Back
+              Welcome 
             </h2>
             <p className="text-muted-foreground mt-2">
-              Manage your knowledge bases and chat sessions
+              管理知识库和聊天会话
             </p>
           </div>
           <div className="flex gap-4">
+
             <a
               href="/dashboard/knowledge/new"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
             >
               <Plus className="mr-2 h-4 w-4" />
-              New Knowledge Base
+              创建知识库
             </a>
           </div>
         </div>
+
 
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-xl border bg-gradient-to-br from-primary/5 to-purple-500/5 p-8 backdrop-blur-sm transition-all hover:shadow-lg">
@@ -81,7 +83,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">
-                    Knowledge Bases
+                    知识库
                   </p>
                   <h3 className="text-3xl font-bold mt-1">
                     {stats.knowledgeBases}
@@ -99,10 +101,11 @@ export default function DashboardPage() {
                   <MessageSquare className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Chat Sessions</p>
+                  <p className="text-sm text-muted-foreground">聊天会话</p>
                   <h3 className="text-3xl font-bold mt-1">{stats.chats}</h3>
                 </div>
               </div>
+
               <ArrowRight className="h-5 w-5 text-muted-foreground" />
             </div>
           </div>
@@ -117,15 +120,16 @@ export default function DashboardPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-medium">Create Knowledge Base</h4>
+                  <h4 className="font-medium">创建知识库</h4>
                   <a href="/dashboard/knowledge/new">
                     <ArrowRight className="h-4 w-4 text-muted-foreground hover:text-primary" />
                   </a>
+
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Start by creating a new knowledge base and uploading your
-                  documents
+                  开始创建一个新知识库并上传您的文档
                 </p>
+
               </div>
             </div>
 
@@ -135,15 +139,16 @@ export default function DashboardPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-medium">Upload Documents</h4>
+                  <h4 className="font-medium">上传文档</h4>
                   <a href="/dashboard/knowledge">
                     <ArrowRight className="h-4 w-4 text-muted-foreground hover:text-primary" />
                   </a>
+
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Upload your PDF, DOCX, MD or TXT files to build your knowledge
-                  base
+                  上传您的 PDF、DOCX、MD 或 TXT 文件以构建您的知识库
                 </p>
+
               </div>
             </div>
 
@@ -153,15 +158,17 @@ export default function DashboardPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-medium">Start Chatting</h4>
+                  <h4 className="font-medium">开始聊天</h4>
                   <a href="/dashboard/chat/new">
                     <ArrowRight className="h-4 w-4 text-muted-foreground hover:text-primary" />
+
                   </a>
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Chat with your knowledge base using AI to get instant answers
+                  使用 AI 与您的知识库聊天以获得即时答案
                 </p>
               </div>
+
             </div>
           </div>
         </div>

@@ -82,20 +82,23 @@ export default function KnowledgeBasePage() {
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-3xl font-bold tracking-tight">
-              Knowledge Bases
+              知识库
             </h2>
             <p className="text-muted-foreground">
-              Manage your knowledge bases and documents
+              管理你的知识库和文档
+
             </p>
           </div>
           <Link
+
             href="/dashboard/knowledge/new"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
             <Plus className="mr-2 h-4 w-4" />
-            New Knowledge Base
+            新知识库
           </Link>
         </div>
+
 
         <div className="grid gap-6">
           {knowledgeBases.map((kb) => (
@@ -107,12 +110,14 @@ export default function KnowledgeBasePage() {
                 <div>
                   <h3 className="text-lg font-semibold">{kb.name}</h3>
                   <p className="text-sm text-muted-foreground">
-                    {kb.description || "No description"}
+                    {kb.description || "没有描述"}
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    {kb.documents.length} documents •{" "}
+
+                    {kb.documents.length} 文档 •{" "}
                     {new Date(kb.created_at).toLocaleDateString()}
                   </p>
+
                 </div>
 
                 <div className="flex space-x-2">
@@ -198,9 +203,10 @@ export default function KnowledgeBasePage() {
           {!loading && knowledgeBases.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">
-                No knowledge bases found. Create one to get started.
+                没有找到知识库。创建一个以开始。
               </p>
             </div>
+
           )}
 
           {loading && (
@@ -208,9 +214,10 @@ export default function KnowledgeBasePage() {
               <div className="space-y-4">
                 <div className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto"></div>
                 <p className="text-muted-foreground animate-pulse">
-                  Loading knowledge bases...
+                  加载知识库...
                 </p>
               </div>
+
             </div>
           )}
         </div>

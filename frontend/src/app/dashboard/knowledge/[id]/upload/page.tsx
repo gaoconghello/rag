@@ -252,10 +252,11 @@ export default function UploadPage({ params }: { params: { id: string } }) {
       <div className="max-w-4xl mx-auto space-y-8">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">
-            Upload Documents
+            上传文档
           </h2>
           <p className="text-muted-foreground">
-            Upload documents to your knowledge base
+            上传文档到你的知识库
+
           </p>
         </div>
 
@@ -270,9 +271,10 @@ export default function UploadPage({ params }: { params: { id: string } }) {
           <input {...getInputProps()} />
           <Upload className="mx-auto h-12 w-12 text-muted-foreground" />
           <p className="mt-4 text-sm text-muted-foreground">
-            Drag and drop files here, or click to select files
+            拖动文件到这里，或点击选择文件
           </p>
           <p className="mt-2 text-xs text-muted-foreground">
+
             Supported formats: PDF, DOCX, TXT, MD
           </p>
         </div>
@@ -280,16 +282,18 @@ export default function UploadPage({ params }: { params: { id: string } }) {
         {files.length > 0 && (
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold">Files</h3>
+              <h3 className="text-lg font-semibold">文件</h3>
               {hasUploadedFiles && !isProcessing && (
                 <button
                   onClick={startProcessing}
+
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
                 >
-                  Start Processing
+                  开始处理
                 </button>
               )}
             </div>
+
 
             <div className="space-y-2 max-h-[400px] overflow-y-auto rounded-lg">
               {files.map((fileStatus) => (
@@ -312,17 +316,19 @@ export default function UploadPage({ params }: { params: { id: string } }) {
                       <div className="flex items-center space-x-2">
                         <Loader2 className="h-4 w-4 animate-spin" />
                         <span className="text-muted-foreground">
-                          Uploading...
+                          上传中...
                         </span>
                       </div>
+
                     )}
                     {fileStatus.status === "processing" && (
                       <div className="flex items-center space-x-2">
                         <Loader2 className="h-4 w-4 animate-spin" />
                         <span className="text-muted-foreground">
-                          Processing...
+                          处理中...
                         </span>
                       </div>
+
                     )}
                     {fileStatus.status === "completed" && (
                       <CheckCircle className="h-5 w-5 text-green-500" />
@@ -352,15 +358,17 @@ export default function UploadPage({ params }: { params: { id: string } }) {
               onClick={() => router.push(`/dashboard/knowledge/${params.id}`)}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
             >
-              Done
+              完成
             </button>
+
           ) : (
             <button
               onClick={() => router.push(`/dashboard/knowledge/${params.id}`)}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
             >
-              Cancel
+              取消
             </button>
+
           )}
         </div>
       </div>
